@@ -6,6 +6,25 @@
     <title>Jc</title>
     <link rel="stylesheet" href="static/css/iconfont.css">
     <link rel="stylesheet" href="static/css/index.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- 使用ajax作出错误提示 -->
+    <script >
+        function err() {
+            $.post({
+                url: "${pageContext.request.contextPath}/ajaxForLogin",
+                data:{'username':$("#name").val(),'password':$("#pwd").val()},
+                success:function (data) {
+                    if (data!=null){
+                        // var html = "";
+                        // html += "<p>"+data+"</p>";
+                        // console.log(html);
+                        // $("#errorMsg").html(html).css("color","red");
+                        document.getElementById("errorMsg").innerHTML=data;
+                    }
+                }
+            });
+        }
+    </script>
     <style>
         #index-video {
             position: absolute;
@@ -29,16 +48,17 @@
 </video>
 <div class="login-box">
     <h1>登陆</h1>
-    <p style="text-align: center;color: red">${error}</p>
+    <p style="text-align: center;color: red" id="errorMsg">${error}</p>
+<!--    <div id="errorMsg"></div>-->
     <form action="/login" method="post">
         <div class="input-box">
             <div class="input-text">
                 <span class='iconfont icon-mine'></span>
-                <input type="text" placeholder="用户名" name="username">
+                <input id="name" type="text" placeholder="用户名" name="username">
             </div>
             <div class="input-text">
                 <span class='iconfont icon-lock'></span>
-                <input type="password" placeholder="密码" name="password">
+                <input id="pwd" type="password" placeholder="密码" name="password" onblur="err()">
             </div>
             <button type="submit" class="input-btn">登录</button>
             <div class="sign-up">

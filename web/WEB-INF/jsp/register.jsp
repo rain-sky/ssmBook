@@ -23,9 +23,10 @@
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-5">
-            <form action="/user/register" class="form-signin">
+            <form action="/userRegister" class="form-signin">
                 <div class="form-group" style="margin-top: 80px;">
-                    <label for="exampleInputEmail1">输入邮箱或者手机号</label>
+                    <p>${msg}</p>
+                    <label for="exampleInputEmail1">输入邮箱</label>
                     <input name="user" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                 </div>
                 <div class="form-group">
